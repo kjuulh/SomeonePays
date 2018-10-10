@@ -1,5 +1,10 @@
 <ion-header>
   <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+
     <ion-title>Sign Up</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -23,7 +28,7 @@
     </ion-item>
 
     <ion-button expand="block" (click)="signupUser(signupForm)" [disabled]="!signupForm.valid">
-      Login
+      Sign Up
     </ion-button>
   </form>
 </ion-content>
