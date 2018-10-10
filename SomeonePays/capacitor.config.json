@@ -1,0 +1,6 @@
+{
+  "appId": "com.antonless.someonepays",
+  "appName": "SomeonePays",
+  "bundledWebRuntime": false,
+  "webDir": "www"
+}

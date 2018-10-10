@@ -1,8 +1,7 @@
 {
   "name": "SomeonePays",
   "integrations": {
-    "cordova": {}
+    "capacitor": {}
   },
-  "type": "angular",
-  "pro_id": "23df0d9f"
+  "type": "angular"
 }
