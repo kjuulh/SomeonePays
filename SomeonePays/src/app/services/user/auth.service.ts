@@ -14,7 +14,7 @@ export class AuthService {
     return firebase.auth().signInWithEmailAndPassword(email, password);
   }
 
-  singupUser(email: string, password: string): Promise<any> {
+  signupUser(email: string, password: string): Promise<any> {
     return firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
