@@ -9,6 +9,8 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class EventDetailPage implements OnInit {
   public currentEvent: any = {};
+  public groupMemberName = "";
+  public groupMembers: Array<string> = [];
 
   constructor(
     private eventService: EventService,
@@ -24,5 +26,23 @@ export class EventDetailPage implements OnInit {
         this.currentEvent = eventSnapshot.data();
         this.currentEvent.id = eventSnapshot.id;
       });
+    this.eventService
+      .getGroupMembers(eventId)
+      .get()
+      .then(groupMembersSnapshot => {
+        groupMembersSnapshot.forEach(groupMember => {
+          this.groupMembers.push(groupMember.data().groupMemberName);
+        });
+      });
+  }
+
+  addGroupMember(groupMemberName: string): void {
+    this.eventService
+      .addGroupMember(
+        groupMemberName,
+        this.currentEvent.id,
+        this.currentEvent.price
+      )
+      .then(() => (this.groupMemberName = ""));
   }
 }

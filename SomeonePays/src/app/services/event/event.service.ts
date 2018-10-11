@@ -41,4 +41,31 @@ export class EventService {
   getEventDetail(eventId: string): firebase.firestore.DocumentReference {
     return this.eventListRef.doc(eventId);
   }
+
+  addGroupMember(
+    groupMemberName: string,
+    eventId: string,
+    eventPrice: number
+  ): Promise<void> {
+    return this.eventListRef
+      .doc(eventId)
+      .collection("groupMemberList")
+      .add({ groupMemberName })
+      .then(() => {
+        return firebase.firestore().runTransaction(transaction => {
+          return transaction
+            .get(this.eventListRef.doc(eventId))
+            .then(eventDoc => {
+              const newRevenue = eventDoc.data().revenue + eventPrice;
+              transaction.update(this.eventListRef.doc(eventId), {
+                revenue: newRevenue
+              });
+            });
+        });
+      });
+  }
+
+  getGroupMembers(eventId: string): firebase.firestore.CollectionReference {
+    return this.eventListRef.doc(eventId).collection("groupMemberList");
+  }
 }
