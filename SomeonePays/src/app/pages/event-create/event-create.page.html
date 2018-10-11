@@ -1,9 +1,37 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>event-create</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>New Group</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+
+  <ion-item>
+    <ion-label stacked>Group Name</ion-label>
+    <ion-input [(ngModel)]="eventName" type="text" placeholder="What's your group's name?"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked>Price</ion-label>
+    <ion-input [(ngModel)]="eventPrice" type="number" placeholder="How much will the group pay?"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked>Cost</ion-label>
+    <ion-input [(ngModel)]="eventCost" type="number" placeholder="How much are you spending?"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Deadline</ion-label>
+    <ion-datetime #eventDate display-format="DD MMM, YY" pickerFormat="DD MMM YYYY" min="2018" max="2020-12-31"></ion-datetime>
+  </ion-item>
+
+  <ion-button expand="block" (click)="createEvent(eventName, eventDate.value, eventPrice, eventCost)">
+    Create Group
+  </ion-button>
 
 </ion-content>
