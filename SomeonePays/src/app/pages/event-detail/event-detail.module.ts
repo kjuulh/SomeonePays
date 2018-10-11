@@ -6,6 +6,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { IonicModule } from "@ionic/angular";
 
 import { EventDetailPage } from "./event-detail.page";
+import { SpinnerComponent } from "../../components/spinner/spinner.component";
 
 const routes: Routes = [
   {
@@ -21,6 +22,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [EventDetailPage]
+  declarations: [EventDetailPage, SpinnerComponent]
 })
 export class EventDetailPageModule {}

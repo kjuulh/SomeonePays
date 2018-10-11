@@ -43,4 +43,8 @@ export class EventDetailPage implements OnInit {
       .addGroupMember(groupMemberName, this.currentEvent.id)
       .then(() => (this.groupMemberName = ""));
   }
+
+  pay() {
+    console.log("Pay: " + this.currentEvent.cost);
+  }
 }
