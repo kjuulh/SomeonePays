@@ -27,6 +27,27 @@
     </ion-card-content>
   </ion-card>
 
+  <ion-card *ngIf="currentEvent?.challengeType=='challenge'">
+    <ion-card-header>
+      Challenge Type
+    </ion-card-header>
+    <ion-card-content>
+      <ion-select placeholder="Select challenge">
+        <ion-select-option value="marathon">Run for a month</ion-select-option>
+        <ion-select-option value="eat-healthy">Eat Healthy for a month</ion-select-option>
+      </ion-select>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Spinner
+    </ion-card-header>
+    <ion-card-content>
+    </ion-card-content>
+  </ion-card>
+
+
   <ion-card class="add-guest-form">
     <ion-card-header>
       Add Group Members

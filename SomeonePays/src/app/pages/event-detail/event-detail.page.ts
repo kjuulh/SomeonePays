@@ -40,11 +40,7 @@ export class EventDetailPage implements OnInit {
 
   addGroupMember(groupMemberName: string): void {
     this.eventService
-      .addGroupMember(
-        groupMemberName,
-        this.currentEvent.id,
-        this.currentEvent.price
-      )
+      .addGroupMember(groupMemberName, this.currentEvent.id)
       .then(() => (this.groupMemberName = ""));
   }
 }
