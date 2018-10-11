@@ -46,25 +46,12 @@ export class EventService {
 
   addGroupMember(
     groupMemberName: string,
-    eventId: string,
-    eventPrice: number
-  ): Promise<void> {
+    eventId: string
+  ): Promise<firebase.firestore.DocumentReference> {
     return this.eventListRef
       .doc(eventId)
       .collection("groupMemberList")
-      .add({ groupMemberName })
-      .then(() => {
-        return firebase.firestore().runTransaction(transaction => {
-          return transaction
-            .get(this.eventListRef.doc(eventId))
-            .then(eventDoc => {
-              const newRevenue = eventDoc.data().revenue + eventPrice;
-              transaction.update(this.eventListRef.doc(eventId), {
-                revenue: newRevenue
-              });
-            });
-        });
-      });
+      .add({ groupMemberName });
   }
 
   getGroupMembers(eventId: string): firebase.firestore.CollectionReference {
