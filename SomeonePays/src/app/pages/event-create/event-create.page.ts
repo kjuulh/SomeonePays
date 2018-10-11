@@ -8,6 +8,9 @@ import { EventService } from "../../services/event/event.service";
   styleUrls: ["./event-create.page.scss"]
 })
 export class EventCreatePage implements OnInit {
+  public eventType: string = "";
+  public eventChallengeType: string = "";
+
   constructor(private router: Router, private eventService: EventService) {}
 
   ngOnInit() {}
@@ -15,25 +18,47 @@ export class EventCreatePage implements OnInit {
   createEvent(
     eventName: string,
     eventDateObject: any,
-    eventPrice: number,
-    eventCost: number
+    eventCost: number,
+    eventType: string,
+    eventChallengeType: string
   ): void {
-    if (eventDateObject === undefined) {
+    let eventDate: Date = new Date();
+
+    if (eventChallengeType === "challenge") {
+      if (eventDateObject === undefined) {
+        return;
+      } else if (
+        eventDateObject.year === undefined ||
+        eventDateObject.month === undefined ||
+        eventDateObject.day === undefined
+      ) {
+        return;
+      }
+      eventDate = new Date(
+        eventDateObject.year.value,
+        eventDateObject.month.value - 1,
+        eventDateObject.day.value
+      );
+    }
+    if (eventType !== "savings" && eventType !== "payment") {
       return;
-    } else if (
-      eventDateObject.year === undefined ||
-      eventDateObject.month === undefined ||
-      eventDateObject.day === undefined
+    }
+    if (
+      eventChallengeType !== "spinner" &&
+      eventChallengeType !== "split" &&
+      eventChallengeType !== "challenge"
     ) {
       return;
     }
-    const eventDate: Date = new Date(
-      eventDateObject.year.value,
-      eventDateObject.month.value - 1,
-      eventDateObject.day.value
-    );
+
     this.eventService
-      .createEvent(eventName, eventDate, eventPrice, eventCost)
+      .createEvent(
+        eventName,
+        eventDate,
+        eventCost,
+        eventType,
+        eventChallengeType
+      )
       .then(() => {
         this.router.navigateByUrl("");
       });

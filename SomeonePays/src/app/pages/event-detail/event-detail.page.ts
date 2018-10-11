@@ -20,19 +20,21 @@ export class EventDetailPage implements OnInit {
   ngOnInit() {
     const eventId: string = this.route.snapshot.paramMap.get("id");
     this.eventService
-      .getEventDetail(eventId)
-      .get()
-      .then(eventSnapshot => {
-        this.currentEvent = eventSnapshot.data();
-        this.currentEvent.id = eventSnapshot.id;
-      });
-    this.eventService
       .getGroupMembers(eventId)
       .get()
       .then(groupMembersSnapshot => {
         groupMembersSnapshot.forEach(groupMember => {
           this.groupMembers.push(groupMember.data().groupMemberName);
         });
+      })
+      .then(() => {
+        this.eventService
+          .getEventDetail(eventId)
+          .get()
+          .then(eventSnapshot => {
+            this.currentEvent = eventSnapshot.data();
+            this.currentEvent.id = eventSnapshot.id;
+          });
       });
   }
 
